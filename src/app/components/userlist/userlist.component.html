@@ -32,7 +32,7 @@
       <input type="text" #email value={{user.Email}}>
     
       <label for="birthday">Birthday:</label>
-      <input type="text" #birthday value={{user.Birthday}}>
+      <input type="datetime-local" #birthday value={{user.Birthday.slice(0,user.Birthday.length-1)}}>
     
       <input type="submit" value="Edit">
     
@@ -58,7 +58,7 @@
   <input type="text" value="" #email>
 
   <label for="birthday">Birthday:</label>
-  <input type="text" value="" #birthday>
+  <input type="datetime-local" value="" #birthday>
 
   <input type="submit" value="Add">
 

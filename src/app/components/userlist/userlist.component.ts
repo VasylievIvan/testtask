@@ -22,6 +22,7 @@ export class UserlistComponent implements OnInit {
       //console.log(users);
       this.users = users.Data;
       this.pages = [];
+      
       for(let i = 1; i<=Math.ceil(users.Metadata.Total/users.Metadata.Limit);i++){
         this.pages.push(i);
       }      
@@ -37,20 +38,26 @@ export class UserlistComponent implements OnInit {
     }
 
     addUser(firstName, lastName, userName, email, birthday){
-      let user = {
-        FirstName:firstName,
-        LastName:lastName,
-        Username:userName,
-        Email:email,
-        Birthday:birthday
+      if(firstName!=""&&lastName!=""&&userName!=""&&email!=""&&birthday!=""){
+        let user = {
+          FirstName:firstName,
+          LastName:lastName,
+          Username:userName,
+          Email:email,
+          Birthday:birthday
+        }
+        console.log(user);
+        this.UserdataService.addUser(user).subscribe();
+        setTimeout(()=>{
+          this.ngOnInit();
+          return false;
+        }
+        ,300);
+        alert("User added!");
+      }else{
+        alert("Fill all fields!");
       }
-      console.log(user);
-      this.UserdataService.addUser(user).subscribe();
-      setTimeout(()=>{
-        this.ngOnInit();
-        return false;
-      }
-      ,300);
+      
     }
     deleteUser(id){
       this.UserdataService.deleteUser(id).subscribe();
@@ -68,19 +75,25 @@ export class UserlistComponent implements OnInit {
       
     }
     editUser(id, firstName, lastName, userName, email, birthday){
-      let user = {
-        FirstName:firstName,
-        LastName:lastName,
-        Username:userName,
-        Email:email,
-        Birthday:birthday
+      if(firstName!=""&&lastName!=""&&userName!=""&&email!=""&&birthday!=""){
+        let user = {
+          FirstName:firstName,
+          LastName:lastName,
+          Username:userName,
+          Email:email,
+          Birthday:birthday
+        }
+        console.log(birthday);
+        this.UserdataService.editUser(user, id).subscribe();
+        setTimeout(()=>{
+          this.ngOnInit();
+          return false;
+        }
+        ,300);
+        alert("User edited!");
+      }else{
+        alert("Fill all fields!");
       }
-      this.UserdataService.editUser(user, id).subscribe();
-      setTimeout(()=>{
-        this.ngOnInit();
-        return false;
-      }
-      ,300);
     }
     toggleUserExpand(id){
       if(this.userExpand == id){

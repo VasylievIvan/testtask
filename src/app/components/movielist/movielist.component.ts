@@ -63,35 +63,44 @@ export class MovielistComponent implements OnInit {
     return false;
   }
   editMovie(id, title, year, director, rating){
-    let movie = {
-      Title:title,
-      Year:year,
-      Director:director,
-      Rating:rating
-    }
-    console.log(movie);
-    this.MoviedataService.editMovie(movie, id).subscribe();
-    setTimeout(()=>{
-      this.ngOnInit();
-      return false;
-    }
-    ,300);
-    
+    if(title!=""&&year!=""&&director!=""&&rating!=""){
+      let movie = {
+        Title:title,
+        Year:year,
+        Director:director,
+        Rating:rating
+      }
+      console.log(movie);
+      this.MoviedataService.editMovie(movie, id).subscribe();
+      setTimeout(()=>{
+        this.ngOnInit();
+        return false;
+      }
+      ,300);
+      alert("Movie edited!");
+    }else{
+      alert("Fill all fields!");
+    }    
   }
   addMovie(title, year, director, rating){
-    let movie = {
-      Title:title,
-      Year:year,
-      Director:director,
-      Rating:rating
+    if(title!=""&&year!=""&&director!=""&&rating!=""){
+      let movie = {
+        Title:title,
+        Year:year,
+        Director:director,
+        Rating:rating
+      }
+      console.log(movie);
+      this.MoviedataService.addMovie(movie).subscribe();
+      setTimeout(()=>{
+        this.ngOnInit();
+        return false;
+      }
+      ,300);
+      alert("Movie added!");
+    }else{
+      alert("Fill all fields!");
     }
-    console.log(movie);
-    this.MoviedataService.addMovie(movie).subscribe();
-    setTimeout(()=>{
-      this.ngOnInit();
-      return false;
-    }
-    ,300);
   }
   deleteMovie(id){
     this.MoviedataService.deleteMovie(id).subscribe();
