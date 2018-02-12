@@ -1,0 +1,62 @@
+<h1>Movies:</h1>
+<div class="pageLinks">
+    <p class="pageLink" *ngFor="let i of pages" (click)="onLinkClick(i.page)">
+        <span *ngIf="activePageNumber == i.page"><b>{{i.page}}</b></span>
+        <span *ngIf="activePageNumber != i.page">{{i.page}}</span>
+    </p>
+</div>
+<div *ngFor="let movie of activePage" class="movieBlock">
+    <h4>{{movie.Title}}
+        <div class="controls">
+            <button (click)="deleteMovie(movie.Id)">X</button>
+            <button (click)="toggleMovieEdit(movie.Id)" *ngIf="movieExpand == movie.Id">Edit</button>
+            <button (click)="toggleMovieExpand(movie.Id)" *ngIf="movieExpand != movie.Id">▼</button>
+            <button (click)="toggleMovieExpand(movie.Id)" *ngIf="movieExpand == movie.Id">▲</button>
+            
+        </div>
+    </h4>
+    <p *ngIf="movieExpand == movie.Id">{{movie.Year}}</p>
+    <p *ngIf="movieExpand == movie.Id">{{movie.Director}}</p>
+    <p *ngIf="movieExpand == movie.Id">{{movie.Rating}}</p>
+    <form *ngIf="movieEdit == movie.Id" (submit)="editMovie(movie.Id, title.value, year.value, director.value, rating.value)">
+        <label for="title">Title:</label>
+        <input type="text" #title value={{movie.Title}}>
+      
+        <label for="year">Year:</label>
+        <input type="number" #year value={{movie.Year}}>
+      
+        <label for="director">Director:</label>
+        <input type="text" #director value={{movie.Director}}>
+      
+        <label for="rating">Rating:</label>
+        <input type="number" #rating value={{movie.Rating}}>     
+
+      
+        <input type="submit" value="Edit">
+      
+    </form>
+  </div>
+    <div class="pageLinks">
+        <p class="pageLink" *ngFor="let i of pages" (click)="onLinkClick(i.page)">
+            <span *ngIf="activePageNumber == i.page"><b>{{i.page}}</b></span>
+            <span *ngIf="activePageNumber != i.page">{{i.page}}</span>
+        </p>
+    </div>
+
+  <form (submit)="addMovie(title.value, year.value, director.value, rating.value)">
+      <label for="title">Title:</label>
+      <input type="text" #title>
+    
+      <label for="year">Year:</label>
+      <input type="number" #year>
+    
+      <label for="director">Director:</label>
+      <input type="text" #director>
+    
+      <label for="rating">Rating:</label>
+      <input type="number" #rating>     
+
+    
+      <input type="submit" value="Add">
+    
+  </form>

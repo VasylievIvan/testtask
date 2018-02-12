@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i');
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    width: 400px;
+    margin: 0 auto;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    padding-left: 0;
+}
+ul li{
+    margin-left: 15px;
+}
+ul a{
+    text-decoration: none;
+}
+
+a{
+    color: black;
+}

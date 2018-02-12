@@ -1,0 +1,65 @@
+<h1>Users:</h1>
+<div class="pageLinks">
+  <p class="pageLink" *ngFor="let i of pages" (click)="onLinkClick(i)">
+    <span *ngIf="activePage == i"><b>{{i}}</b></span>
+    <span *ngIf="activePage != i">{{i}}</span>
+  </p>  
+</div>
+<div *ngFor="let user of users" class="userBlock">
+  <h4>{{user.FirstName}} {{user.LastName}}
+    <div class="controls">
+    <button (click)="deleteUser(user.Id)">X</button>
+    <button (click)="toggleUserEdit(user.Id)" *ngIf="userExpand == user.Id">Edit</button>
+    <button (click)="toggleUserExpand(user.Id)" *ngIf="userExpand != user.Id">▼</button>
+    <button (click)="toggleUserExpand(user.Id)" *ngIf="userExpand == user.Id">▲</button>
+    
+    </div>
+    </h4>
+  <p *ngIf="userExpand == user.Id">Username: {{user.Username}}</p>
+  <p *ngIf="userExpand == user.Id">E-mail: {{user.Email}}</p>
+  <p *ngIf="userExpand == user.Id">Birthday: {{user.Birthday}}</p>
+  <form *ngIf="userEdit == user.Id" (submit)="editUser(user.Id, firstName.value, lastName.value, userName.value, email.value, birthday.value)">
+      <label for="firstName">First name:</label>
+      <input type="text" #firstName value={{user.FirstName}}>
+    
+      <label for="lastName">Last name:</label>
+      <input type="text" #lastName value={{user.LastName}}>
+    
+      <label for="userName">Username:</label>
+      <input type="text" #userName value={{user.Username}}>
+    
+      <label for="email">E-mail:</label>
+      <input type="text" #email value={{user.Email}}>
+    
+      <label for="birthday">Birthday:</label>
+      <input type="text" #birthday value={{user.Birthday}}>
+    
+      <input type="submit" value="Edit">
+    
+  </form>
+</div>
+<div class="pageLinks">
+  <p class="pageLink" *ngFor="let i of pages" (click)="onLinkClick(i)">
+    <span *ngIf="activePage == i"><b>{{i}}</b></span>
+    <span *ngIf="activePage != i">{{i}}</span>
+  </p>  
+</div>
+<form (submit)="addUser(firstName.value, lastName.value, userName.value, email.value, birthday.value)">
+  <label for="firstName">First name:</label>
+  <input type="text" value="" #firstName>
+
+  <label for="lastName">Last name:</label>
+  <input type="text" value="" #lastName>
+
+  <label for="userName">Username:</label>
+  <input type="text" value="" #userName>
+
+  <label for="email">E-mail:</label>
+  <input type="text" value="" #email>
+
+  <label for="birthday">Birthday:</label>
+  <input type="text" value="" #birthday>
+
+  <input type="submit" value="Add">
+
+</form>
